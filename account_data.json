@@ -6,8 +6,8 @@
     "AccountNum": "0055709",
     "Password": {
       "Value": "Abcd1234",
-      "StrengthNum": 50,
-      "StrengthText": "good",
+      "StrengthNum": 70,
+      "StrengthText": "strong",
       "LastReset": "2022/05/01"
     }
   },
@@ -17,9 +17,9 @@
     "UserId": "arose",
     "AccountNum": "00887564",
     "Password": {
-      "Value": "1234AbCd",
-      "StrengthNum": 50,
-      "StrengthText": "good",
+      "Value": "4444AbCd",
+      "StrengthNum": 79,
+      "StrengthText": "strong",
       "LastReset": "2022/05/01"
     }
   },
@@ -28,8 +28,8 @@
     "LoginUrl": "https://www.gmail.com",
     "UserId": "arose@gmail.com",
     "Password": {
-      "Value": "Abcd1234",
-      "StrengthNum": 50,
+      "Value": "1111AAAA",
+      "StrengthNum": 58,
       "StrengthText": "good",
       "LastReset": "2022/05/01"
     }
