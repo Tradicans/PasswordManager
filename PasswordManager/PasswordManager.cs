@@ -73,6 +73,26 @@ namespace PasswordManager
                     if(Int32.TryParse(command, out int i))
                     {
                         //TODO show details for accounts_list[i]
+                        Console.WriteLine("****************************************************************************************************");
+                        Console.WriteLine("\tSelected Account Information:");
+                        //account description
+                        Console.WriteLine("Description:\t\t" + accounts_list[i-1].Description);
+                        //user ID
+                        Console.WriteLine("User ID:\t\t" + accounts_list[i-1].UserId);
+                        //login webpage
+                        Console.WriteLine("Login Page:\t\t" + accounts_list[i - 1].LoginUrl);
+                        //account number
+                        Console.WriteLine("Account #:\t\t" + accounts_list[i - 1].AccountNum);
+                        //password
+                        Console.WriteLine("Password:\t\t" + accounts_list[i - 1].Password.Value);
+                        //password strength
+                        Console.WriteLine("Password Strength:\t" + accounts_list[i - 1].Password.StrengthText + " " + accounts_list[i - 1].Password.StrengthNum + "%");
+                        //change date
+                        Console.WriteLine("Password Changed:\t" + accounts_list[i - 1].Password.LastReset.ToShortDateString());
+                        
+
+
+
 
                         //TODO show options to edit password or delete account
 
@@ -110,25 +130,25 @@ namespace PasswordManager
                                     Account a = new Account();
                                     string aEntry;
                                     //account description
-                                    Console.Write("\n\nEnter the account name/description: ");
+                                    Console.Write("\nEnter the account name/description: ");
                                     aEntry = Console.ReadLine();
                                     a.Description = aEntry;
                                     //user ID
-                                    Console.Write("\n\nEnter the user ID: ");
+                                    Console.Write("\nEnter the user ID: ");
                                     aEntry = Console.ReadLine();
                                     a.UserId = aEntry;
                                     //login webpage
-                                    Console.Write("\n\nEnter the login URL: ");
+                                    Console.Write("\nEnter the login URL: ");
                                     aEntry = Console.ReadLine();
                                     a.LoginUrl = aEntry;
                                     //account number
-                                    Console.Write("\n\nEnter the account number: ");
+                                    Console.Write("\nEnter the account number: ");
                                     aEntry = Console.ReadLine();
                                     a.AccountNum = aEntry;
                                     //password
                                     Password p = new Password();
                                     a.Password = p;
-                                    Console.Write("\n\nEnter the password: ");
+                                    Console.Write("\nEnter the password: ");
                                     aEntry = Console.ReadLine();
                                     p.Value = aEntry;
                                     PasswordTester pw = new PasswordTester(aEntry);
@@ -143,11 +163,11 @@ namespace PasswordManager
                                         {
                                             //once valid, add to accounts list
                                             accounts_list.Add(a);
-                                            Console.WriteLine("Account " + a.Description + " added");
+                                            Console.WriteLine("\nAccount " + a.Description + " added");
                                         }
                                         else
                                         {
-                                            Console.WriteLine("Account information invalid. Please re-enter");
+                                            Console.WriteLine("\nAccount information invalid. Please re-enter");
                                         }
                                         
                                     } while (validAccount == false);
@@ -159,24 +179,44 @@ namespace PasswordManager
                             case "X":
                                 {
                                     notdone = false;
-                                    
+                                    //d.The updated collection of account objects should be written to the JSON file.
+                                    json_data = "";
+                                    foreach (Account a in accounts_list)
+                                    {
+                                        json_data += JsonConvert.SerializeObject(a);
+                                    }
+                                    try
+                                    {
+                                        File.WriteAllText(ACCOUNTS_FILE, json_data);
+                                        Console.WriteLine($"Accounts saved to {ACCOUNTS_FILE}.\n");
+                                    }
+                                    catch (IOException ex)
+                                    {
+                                        Console.WriteLine($"\n\nERROR: {ex.Message}.\n");
+                                    }
                                 }
                                 break ;
                             default:
                                 break;
                         }
                     }
-
-                    //Console.Write("\n\nEnter a command: ");
-                    //notdone = Console.ReadKey().KeyChar != 'X';
-
                 } while (notdone);
-                //d.The updated collection of account objects should be written to the JSON file.
-                foreach (var item in accounts_list)
-                {
-
-                }
-                //list accounts
+                ////d.The updated collection of account objects should be written to the JSON file.
+                //json_data = "";
+                //foreach (Account a in accounts_list)
+                //{
+                //    json_data += JsonConvert.SerializeObject(a);
+                //}
+                //try
+                //{
+                //    File.WriteAllText(ACCOUNTS_FILE, json_data);
+                //    Console.WriteLine($"Accounts saved to {ACCOUNTS_FILE}.\n");
+                //}
+                //catch (IOException ex)
+                //{
+                //    Console.WriteLine($"\n\nERROR: {ex.Message}.\n");
+                //}
+                
             }
             else
             {
